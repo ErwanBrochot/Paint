@@ -54,6 +54,7 @@ public class Window extends JFrame implements ActionListener {
                  JMenu file= new JMenu("File");
                  JMenu aPropos= new JMenu("A propos");
                  JMenuItem newMenuItem= new JMenuItem("New");
+                 newMenuItem.addActionListener(this);
                  JMenuItem openMenuItem= new JMenuItem("Open");
                  JMenuItem saveMenuItem= new JMenuItem("Save");
                  saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,KeyEvent.CTRL_DOWN_MASK));
@@ -93,11 +94,47 @@ public class Window extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
                 String cmd= e.getActionCommand();
 
+                //Interaction avec les boutons
                 switch (cmd)
                 {
                         case "dark":
-                                System.out.println("dark selected");
+                                System.out.println("dark has been selected");
                                 break;
+                        case "red":
+                                System.out.println("red has been selected");
+                                break;
+                        case "blue":
+                                System.out.println("blue has been selected");
+                                break;
+                        case "green":
+                                System.out.println("green has been selected");
+                                break;
+                        case "yellow":
+                                System.out.println("yellow has been selected");
+                                break;
+                        case "pink":
+                                System.out.println("pink has been selected");
+                                break;
+                        case "magenta":
+                                System.out.println("magenta has been selected");
+                                break;
+                        case "orange":
+                                System.out.println("Orange has been selected");
+                                break;
+                        case "Ellipse":
+                                System.out.println("Ellipse has been selected");
+                                break;
+                        case "Circle":
+                                System.out.println ("Circle has been selected");
+                                break;
+                        case "Rectangle":
+                                System.out.println ("Rectangle has been selected");
+                                break;
+                        case "Square":
+                                System.out.println("Square has been selected");
+                                break;
+                        case "New":
+                                System.out.println("New has been selected");
                 }
         }
 }
