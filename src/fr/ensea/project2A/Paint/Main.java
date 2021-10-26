@@ -11,10 +11,10 @@ public class Main {
 //        int px=b.getX()-a.getX();
 //        int py=b.getY()-a.getY();
 //        Rectangle rect= new Rectangle (px,py,Color.blue);
-        Rectangle rect= new Rectangle (b,3,4,Color.blue);
-        Ellipse elli= new Ellipse(b,10,16,Color.blue);
-        Square carr= new Square (b,16,15,Color.red);
-        Circle circ= new Circle(b,16,16,Color.green);
+        Rectangle rect= new Rectangle (2,3,Color.blue);
+        Ellipse elli= new Ellipse(10,16,Color.blue);
+        Square carr= new Square (16,15,Color.red);
+        Circle circ= new Circle(16,16,Color.green);
         System.out.println(b);
         System.out.println(rect);
         System.out.println(elli);

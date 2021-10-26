@@ -7,22 +7,22 @@ public class Ellipse extends Figure {
     protected int semiAxisX;
     protected int semiAxisY;
 
-    public Ellipse(Point origin,int px, int py, Color c) {
-        super();
-        this.origin=origin;
+    public Ellipse(int px, int py, Color color) {
+        super(color,new Point(px,py));
         this.c=c;
-        setBoundingBox(px,py);
+        setBoundingBox(0,0);
     }
 
     @Override
     protected void setBoundingBox(int heightBB, int widthBB) {
-        semiAxisX=heightBB/2;
-        semiAxisY=widthBB/2;
+        semiAxisX=widthBB/2;
+        semiAxisY=heightBB/2;
     }
 
     @Override
     protected void draw(Graphics g) {
-
+        g.setColor(c);
+        g.drawOval(origin.getX(), origin.getY(), semiAxisX*2,semiAxisY*2);
     }
 
     @Override

@@ -4,16 +4,14 @@ import java.awt.*;
 
 public class Rectangle extends Figure {
 
-   protected int length;
-   protected  int width;
+    protected int length;
+    protected  int width;
 //Constructeurs
 
 
-    public Rectangle(Point origin,int px, int py, Color color){
-        super();
-        this.origin=origin;
-        c=color;
-        setBoundingBox(px,py);
+    public Rectangle(int px, int py, Color color){
+        super(color, new Point (px, py));
+        setBoundingBox(0,0);
 
 
     }
@@ -30,6 +28,8 @@ public class Rectangle extends Figure {
 
     @Override
     protected void draw(Graphics g) {
+        g.setColor(c);
+        g.drawRect(origin.getX(), origin.getY(), width,length);
 
     }
 
