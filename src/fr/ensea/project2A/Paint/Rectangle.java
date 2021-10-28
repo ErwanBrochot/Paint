@@ -29,7 +29,7 @@ public class Rectangle extends Figure {
     @Override
     protected void draw(Graphics g) {
         g.setColor(c);
-        g.drawRect(origin.getX(), origin.getY(), width,length);
+        g.fillRect(origin.getX(), origin.getY(), width,length);
 
     }
 

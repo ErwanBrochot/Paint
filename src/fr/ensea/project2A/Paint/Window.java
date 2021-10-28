@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class Window extends JFrame implements ActionListener {
         Drawing drawPanel= new Drawing();
@@ -159,6 +162,7 @@ public class Window extends JFrame implements ActionListener {
                                 break;
                         case "Save":
                                 System.out.println("Save has been selected");
+                                drawPanel.save();
                                 break;
                         case "Quit":
                                 System.out.println ("Quit has been selected");
@@ -174,6 +178,8 @@ public class Window extends JFrame implements ActionListener {
                                 break;
 
                 }
+
+
         }
 }
 

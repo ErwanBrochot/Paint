@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Drawing extends JPanel implements MouseMotionListener, MouseListener {
@@ -126,7 +130,22 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
             f.draw(g);
             this.repaint();
         }
+        }
+
+    public void save(){
+        try{
+            FileOutputStream fos= new FileOutputStream("sauveDessin");
+            ObjectOutputStream oos= new ObjectOutputStream(fos);
+
+            oos.writeInt(list.size());
+            for (Figure f:list){
+                oos.writeObject(f);
+            }
+            oos.close();
+        } catch (Exception e) {
+            System.out.println("Problèmos");
 
         }
+    }
     }
 

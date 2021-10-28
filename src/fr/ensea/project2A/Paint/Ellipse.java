@@ -22,7 +22,7 @@ public class Ellipse extends Figure {
     @Override
     protected void draw(Graphics g) {
         g.setColor(c);
-        g.drawOval(origin.getX(), origin.getY(), semiAxisX*2,semiAxisY*2);
+        g.fillOval(origin.getX(), origin.getY(), semiAxisX*2,semiAxisY*2);
     }
 
     @Override
