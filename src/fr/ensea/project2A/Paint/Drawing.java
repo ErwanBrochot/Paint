@@ -5,10 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Drawing extends JPanel implements MouseMotionListener, MouseListener {
@@ -83,11 +80,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
         secondMouseEvent.setX(e.getX());
         secondMouseEvent.setY(e.getY());
-        //x=e.getX()-figure.origin.getX();
-       // y=e.getY()-figure.origin.getY();
-       // figure.setBoundingBox(y,x);
         figure.setBoundingBox(firstMouseEvent,secondMouseEvent);
-       // System.out.println("x= "+x +" ,y="+y);
         System.out.println(list);
         repaint();
     }
@@ -104,13 +97,10 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     @Override
     public void mouseDragged(MouseEvent e) {
-       // x=e.getX()-figure.origin.getX();
-       // y=e.getY()-figure.origin.getY();
-        // figure.setBoundingBox(y,x);
         secondMouseEvent= new Point(e.getX(),e.getY());
 
         figure.setBoundingBox(firstMouseEvent,secondMouseEvent);
-        //System.out.println("x= "+x +" ,y="+y);
+
         repaint();
     }
 
@@ -140,19 +130,20 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     public void save(){
         try{
-            FileOutputStream fos= new FileOutputStream("sauveDessin");
-            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            FileOutputStream fileOut= new FileOutputStream("saveDraw");
+            ObjectOutputStream out= new ObjectOutputStream(fileOut);
 
-            oos.writeInt(list.size());
-            for (Figure f:list){
-                oos.writeObject(f);
-            }
-            oos.close();
+
+            out.writeObject(list);
+            out.close();
+            fileOut.close();
+            System.out.println("\nSauvegardé avec succès...\n");
         } catch (Exception e) {
             System.out.println("Problèmos");
 
         }
     }
+
 
 
 }

@@ -1,6 +1,6 @@
 package fr.ensea.project2A.Paint;
 
-import javax.management.StandardEmitterMBean;
+
 import java.awt.*;
 
 public class Ellipse extends Figure {
