@@ -19,6 +19,7 @@ public abstract class Figure {
 
     //Methods
     protected abstract void setBoundingBox(int heightBB, int widthBB);
+    protected abstract void setBoundingBox(Point a, Point b);
     protected abstract void draw (Graphics g);
 
     public Color getC() {

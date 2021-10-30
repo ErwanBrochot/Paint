@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 public class Window extends JFrame implements ActionListener {
-        Drawing drawPanel= new Drawing();
+       private final Drawing drawPanel= new Drawing();
 
          public Window(String title,int x,int y){
                  this.setTitle(title);
@@ -179,8 +179,8 @@ public class Window extends JFrame implements ActionListener {
 
                 }
 
-
         }
+
 }
 
 

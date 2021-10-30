@@ -15,8 +15,10 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     private Color c;
     private final ArrayList<Figure> list;
     private String nameFigure;
-    private  int x;
-    private  int y;
+    private final int x;
+    private final int y;
+    private Point firstMouseEvent;
+    private  Point secondMouseEvent;
 
     public Drawing() {
         super();
@@ -54,23 +56,20 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     public void mousePressed(MouseEvent e) {
 
         if(c!=Color.white){
+            firstMouseEvent= new Point (e.getX(),e.getY());
             switch (nameFigure) {
                 case "Rectangle":
-                    list.add(figure=new Rectangle(x, y, c));
-                    figure.origin=(new Point(e.getX(),e.getY()));
+                    list.add(figure=new Rectangle(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
                     break;
                 case "Ellipse":
-                    list.add(figure=new Ellipse(x, y, c));
-                    figure.origin=(new Point(e.getX(),e.getY()));
+                    list.add(figure=new Ellipse(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
                     break;
                 case "Square":
-                    list.add(figure=new Square(x, y, c));
-                    figure.origin=(new Point(e.getX(),e.getY()));
+                    list.add(figure=new Square(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
 
                     break;
                 case "Circle":
-                    list.add(figure=new Circle(x, y, c));
-                    figure.origin=(new Point(e.getX(),e.getY()));
+                    list.add(figure=new Circle(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
                     break;
             }
 
@@ -82,10 +81,13 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     @Override
     public void mouseReleased(MouseEvent e) {
 
-        x=e.getX()-figure.origin.getX();
-        y=e.getY()-figure.origin.getY();
-        figure.setBoundingBox(y,x);
-        System.out.println("x= "+x +" ,y="+y);
+        secondMouseEvent.setX(e.getX());
+        secondMouseEvent.setY(e.getY());
+        //x=e.getX()-figure.origin.getX();
+       // y=e.getY()-figure.origin.getY();
+       // figure.setBoundingBox(y,x);
+        figure.setBoundingBox(firstMouseEvent,secondMouseEvent);
+       // System.out.println("x= "+x +" ,y="+y);
         System.out.println(list);
         repaint();
     }
@@ -102,10 +104,13 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        x=e.getX()-figure.origin.getX();
-        y=e.getY()-figure.origin.getY();
-        figure.setBoundingBox(y,x);
-        System.out.println("x= "+x +" ,y="+y);
+       // x=e.getX()-figure.origin.getX();
+       // y=e.getY()-figure.origin.getY();
+        // figure.setBoundingBox(y,x);
+        secondMouseEvent= new Point(e.getX(),e.getY());
+
+        figure.setBoundingBox(firstMouseEvent,secondMouseEvent);
+        //System.out.println("x= "+x +" ,y="+y);
         repaint();
     }
 
@@ -132,6 +137,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         }
         }
 
+
     public void save(){
         try{
             FileOutputStream fos= new FileOutputStream("sauveDessin");
@@ -147,5 +153,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
         }
     }
-    }
+
+
+}
 
