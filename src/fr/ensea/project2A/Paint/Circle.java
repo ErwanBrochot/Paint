@@ -29,25 +29,22 @@ public class Circle extends Ellipse {
     @Override
     protected void setBoundingBox(Point origin, Point second) {
         super.setBoundingBox(origin, second);
-        if (semiAxisX<semiAxisY){
-            semiAxisY=semiAxisX;
+        if (semiAxisX < semiAxisY) {
+            semiAxisY = semiAxisX;
 
-            if(origin.getX()< second.getX() & second.getY()< origin.getY()){ // tire en haut à droite
-                super.origin.setY(origin.getY()-semiAxisY*2);
+            if (origin.getX() < second.getX() & second.getY() < origin.getY()) { // tire en haut à droite
+                super.origin.setY(origin.getY() - semiAxisY * 2);
 
+            } else if (second.getX() < origin.getX() & second.getY() < origin.getY()) { // tire en haut à gauche
+                super.origin.setY(origin.getY() - semiAxisY * 2);
             }
-            else if (second.getX()< origin.getX() & second.getY()< origin.getY()){ // tire en haut à gauche
-                super.origin.setY(origin.getY()-semiAxisY*2);
-            }
-        }
-        else{
-            semiAxisX= semiAxisY;
+        } else {
+            semiAxisX = semiAxisY;
 
-            if(second.getX()< origin.getX() & origin.getY()< second.getY()){ // Tire en bas a à gauche
-                super.origin.setX(origin.getX()-semiAxisX*2);
-            }
-            else if (second.getX()< origin.getX() & second.getY()< origin.getY()){ // tire en haut à gauche
-                super.origin.setX(origin.getX()-semiAxisX*2);
+            if (second.getX() < origin.getX() & origin.getY() < second.getY()) { // Tire en bas a à gauche
+                super.origin.setX(origin.getX() - semiAxisX * 2);
+            } else if (second.getX() < origin.getX() & second.getY() < origin.getY()) { // tire en haut à gauche
+                super.origin.setX(origin.getX() - semiAxisX * 2);
             }
         }
     }

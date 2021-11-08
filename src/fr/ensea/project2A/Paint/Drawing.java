@@ -5,26 +5,28 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Drawing extends JPanel implements MouseMotionListener, MouseListener {
-    private Color c;
     private final ArrayList<Figure> list;
-    private String nameFigure;
     private final int x;
     private final int y;
+    Figure figure;
+    private Color c;
+    private String nameFigure;
     private Point firstMouseEvent;
-    private  Point secondMouseEvent;
+    private Point secondMouseEvent;
 
     public Drawing() {
         super();
         this.setBackground(Color.white);
-        list=new ArrayList<Figure>();
-        nameFigure=null;
-        x=0;
-        y=0;
-        c= Color.white;
+        list = new ArrayList<>();
+        nameFigure = null;
+        x = 0;
+        y = 0;
+        c = Color.white;
         addMouseListener(this);
         addMouseMotionListener(this);
 
@@ -43,7 +45,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         this.nameFigure = nameFigure;
     }
 
-    Figure figure;
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -52,21 +54,21 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     @Override
     public void mousePressed(MouseEvent e) {
 
-        if(c!=Color.white){
-            firstMouseEvent= new Point (e.getX(),e.getY());
+        if (c != Color.white) {
+            firstMouseEvent = new Point(e.getX(), e.getY());
             switch (nameFigure) {
                 case "Rectangle":
-                    list.add(figure=new Rectangle(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
+                    list.add(figure = new Rectangle(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
                     break;
                 case "Ellipse":
-                    list.add(figure=new Ellipse(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
+                    list.add(figure = new Ellipse(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
                     break;
                 case "Square":
-                    list.add(figure=new Square(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
+                    list.add(figure = new Square(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
 
                     break;
                 case "Circle":
-                    list.add(figure=new Circle(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
+                    list.add(figure = new Circle(firstMouseEvent.getX(), firstMouseEvent.getY(), c));
                     break;
             }
 
@@ -80,7 +82,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
         secondMouseEvent.setX(e.getX());
         secondMouseEvent.setY(e.getY());
-        figure.setBoundingBox(firstMouseEvent,secondMouseEvent);
+        figure.setBoundingBox(firstMouseEvent, secondMouseEvent);
         System.out.println(list);
         repaint();
     }
@@ -97,9 +99,9 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        secondMouseEvent= new Point(e.getX(),e.getY());
+        secondMouseEvent = new Point(e.getX(), e.getY());
 
-        figure.setBoundingBox(firstMouseEvent,secondMouseEvent);
+        figure.setBoundingBox(firstMouseEvent, secondMouseEvent);
 
         repaint();
     }
@@ -121,29 +123,28 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         setBackground(Color.white);
-        for (Figure f:list){
+        for (Figure f : list) {
             f.draw(g);
             this.repaint();
         }
-        }
+    }
 
 
-    public void save(){
-        try{
-            FileOutputStream fileOut= new FileOutputStream("saveDraw");
-            ObjectOutputStream out= new ObjectOutputStream(fileOut);
-
-
-            out.writeObject(list);
+    public void save() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("saveDraw");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeInt(list.size());
+                for (Figure f: list){
+                    out.writeObject(f);
+                }
             out.close();
-            fileOut.close();
             System.out.println("\nSauvegardé avec succès...\n");
         } catch (Exception e) {
             System.out.println("Problèmos");
 
         }
     }
-
 
 
 }

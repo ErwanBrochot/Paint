@@ -1,4 +1,5 @@
 package fr.ensea.project2A.Paint;
+
 import java.awt.*;
 
 public abstract class Figure {
@@ -7,20 +8,23 @@ public abstract class Figure {
     protected Point origin;
 
     //Constructeur
-    public Figure (Color color, Point point){
-            c=color;
-            origin=point;
+    public Figure(Color color, Point point) {
+        c = color;
+        origin = point;
     }
-    public Figure (){
-        c=null;
-        origin=null;
+
+    public Figure() {
+        c = null;
+        origin = null;
     }
 
 
     //Methods
     protected abstract void setBoundingBox(int heightBB, int widthBB);
+
     protected abstract void setBoundingBox(Point a, Point b);
-    protected abstract void draw (Graphics g);
+
+    protected abstract void draw(Graphics g);
 
     public Color getC() {
         return c;
