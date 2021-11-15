@@ -32,6 +32,10 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     }
 
+    public void undoList(){
+        list.remove(list.size()-1);
+    }
+
     public void setC(Color c) {
         this.c = c;
     }
@@ -144,9 +148,42 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         }
     }
 
+    public void save(String nameFile) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(nameFile);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(list);
+            out.close();
+            System.out.println("\nSauvegardé avec succès...\n");
+        } catch (Exception e) {
+            System.out.println("Problèmos");
+            e.printStackTrace();
+
+        }
+    }
+
     public void read() {
         try {
             FileInputStream fileIn = new FileInputStream("saveDraw");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            list = (ArrayList<Figure>) in.readObject();
+            System.out.println("Ouvert avec succès");
+            in.close();
+            fileIn.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void read(String nameFile) {
+        try {
+            FileInputStream fileIn = new FileInputStream(nameFile);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             list = (ArrayList<Figure>) in.readObject();
             System.out.println("Ouvert avec succès");

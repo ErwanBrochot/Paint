@@ -64,6 +64,9 @@ public class Window extends JFrame implements ActionListener {
         newMenuItem.addActionListener(this);
         JMenuItem openMenuItem = new JMenuItem("Open");
         openMenuItem.addActionListener(this);
+        JMenuItem undoMenuItem= new JMenuItem("Undo");
+        undoMenuItem.setAccelerator((KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK)));
+        undoMenuItem.addActionListener(this);
         JMenuItem saveMenuItem = new JMenuItem("Save");
         saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
         saveMenuItem.addActionListener(this);
@@ -72,6 +75,7 @@ public class Window extends JFrame implements ActionListener {
         file.add(newMenuItem);
         file.add(openMenuItem);
         file.add(saveMenuItem);
+        file.add(undoMenuItem);
         file.add(quitMenuItem);
         menuBar.add(file);
         menuBar.add(aPropos);
@@ -157,16 +161,35 @@ public class Window extends JFrame implements ActionListener {
                 drawPanel.setList(new ArrayList<>());
                 break;
             case "Open":
+                JFileChooser chooser=  new JFileChooser();
+                int userSelection= chooser.showOpenDialog(this);
+                if (userSelection==JFileChooser.APPROVE_OPTION){
+                    String fileToOpen= chooser.getSelectedFile().getAbsolutePath();
+                    drawPanel.read(fileToOpen);
+                }
+                else{
+                    System.out.println("Save has been cancelled");
+                }
                 System.out.println("Open has been selected");
-                drawPanel.read();
+              //  drawPanel.read();
                 break;
             case "Save":
+                JFileChooser chooser2=  new JFileChooser();
+                int userSelection2= chooser2.showSaveDialog(this);
+                if (userSelection2==JFileChooser.APPROVE_OPTION){
+                    String fileToSave= chooser2.getSelectedFile().getAbsolutePath();
+                    drawPanel.save(fileToSave);
+                }
+                else{
+                    System.out.println("Save has been cancelled");
+                }
                 System.out.println("Save has been selected");
-                drawPanel.save();
+                //drawPanel.save();
                 break;
             case "Quit":
                 System.out.println("Quit has been selected");
                 System.exit(0);
+
                 break;
             case "Crédits":
                 System.out.println("Crédits has been selected");
@@ -176,6 +199,10 @@ public class Window extends JFrame implements ActionListener {
                 creditDialogBox.setSize(200, 100);
                 creditDialogBox.setVisible(true);
                 break;
+
+            case"Undo":
+                System.out.println("Undo has been selected");
+                drawPanel.undoList();
 
         }
 
