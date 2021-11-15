@@ -1,8 +1,9 @@
 package fr.ensea.project2A.Paint;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Figure {
+public abstract class Figure implements Serializable {
 
     protected Color c;
     protected Point origin;
@@ -14,8 +15,8 @@ public abstract class Figure {
     }
 
     public Figure() {
-        c = null;
-        origin = null;
+        c = new Color(255, 255, 255);
+        origin = new Point(0, 0);
     }
 
 
@@ -34,6 +35,13 @@ public abstract class Figure {
         this.c = c;
     }
 
+    public Point getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Point origin) {
+        this.origin = origin;
+    }
 
     @Override
     public String toString() {

@@ -2,16 +2,15 @@ package fr.ensea.project2A.Paint;
 
 
 import java.awt.*;
-import java.io.Serializable;
 
 
-public class Ellipse extends Figure implements Serializable {
+public class Ellipse extends Figure {
     protected int semiAxisX;
     protected int semiAxisY;
 
+
     public Ellipse(int px, int py, Color color) {
         super(color, new Point(px, py));
-        this.c = c;
         setBoundingBox(0, 0);
     }
 
@@ -61,5 +60,25 @@ public class Ellipse extends Figure implements Serializable {
                 ", c=" + c +
                 ", origin=" + origin +
                 '}';
+    }
+
+    @Override
+    public Color getC() {
+        return super.getC();
+    }
+
+    @Override
+    public void setC(Color c) {
+        super.setC(c);
+    }
+
+    @Override
+    public Point getOrigin() {
+        return super.getOrigin();
+    }
+
+    @Override
+    public void setOrigin(Point origin) {
+        super.setOrigin(origin);
     }
 }

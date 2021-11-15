@@ -1,9 +1,8 @@
 package fr.ensea.project2A.Paint;
 
 import java.awt.*;
-import java.io.Serializable;
 
-public class Rectangle extends Figure implements Serializable {
+public class Rectangle extends Figure {
 
     protected int length;
     protected int width;
@@ -78,13 +77,25 @@ public class Rectangle extends Figure implements Serializable {
         this.width = width;
     }
 
-    //Setter
-
-    public int getLength() {
-        return length;
+    @Override
+    public Point getOrigin() {
+        return super.getOrigin();
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    @Override
+    public void setOrigin(Point origin) {
+        super.setOrigin(origin);
+    }
+
+    //Setter
+
+    @Override
+    public Color getC() {
+        return super.getC();
+    }
+
+    @Override
+    public void setC(Color c) {
+        super.setC(c);
     }
 }

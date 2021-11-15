@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 
 public class Window extends JFrame implements ActionListener {
@@ -59,6 +60,7 @@ public class Window extends JFrame implements ActionListener {
         aPropos.add(creditsMenuItem);
         creditsMenuItem.addActionListener(this);
         JMenuItem newMenuItem = new JMenuItem("New");
+        newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
         newMenuItem.addActionListener(this);
         JMenuItem openMenuItem = new JMenuItem("Open");
         openMenuItem.addActionListener(this);
@@ -152,9 +154,11 @@ public class Window extends JFrame implements ActionListener {
                 break;
             case "New":
                 System.out.println("New has been selected");
+                drawPanel.setList(new ArrayList<>());
                 break;
             case "Open":
                 System.out.println("Open has been selected");
+                drawPanel.read();
                 break;
             case "Save":
                 System.out.println("Save has been selected");

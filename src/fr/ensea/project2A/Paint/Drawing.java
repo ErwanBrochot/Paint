@@ -5,15 +5,14 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
-public class Drawing extends JPanel implements MouseMotionListener, MouseListener {
-    private final ArrayList<Figure> list;
+public class Drawing extends JPanel implements MouseMotionListener, MouseListener, Serializable {
     private final int x;
     private final int y;
     Figure figure;
+    private ArrayList<Figure> list;
     private Color c;
     private String nameFigure;
     private Point firstMouseEvent;
@@ -41,10 +40,13 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         return list;
     }
 
+    public void setList(ArrayList<Figure> list) {
+        this.list = list;
+    }
+
     public void setNameFigure(String nameFigure) {
         this.nameFigure = nameFigure;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -111,7 +113,6 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     }
 
-
     @Override
     public String toString() {
         return "Drawing{" +
@@ -129,23 +130,38 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         }
     }
 
-
     public void save() {
         try {
             FileOutputStream fileOut = new FileOutputStream("saveDraw");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                out.writeInt(list.size());
-                for (Figure f: list){
-                    out.writeObject(f);
-                }
+            out.writeObject(list);
             out.close();
             System.out.println("\nSauvegardé avec succès...\n");
         } catch (Exception e) {
             System.out.println("Problèmos");
+            e.printStackTrace();
 
         }
     }
 
+    public void read() {
+        try {
+            FileInputStream fileIn = new FileInputStream("saveDraw");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            list = (ArrayList<Figure>) in.readObject();
+            System.out.println("Ouvert avec succès");
+            in.close();
+            fileIn.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

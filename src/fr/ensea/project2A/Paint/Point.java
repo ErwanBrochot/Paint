@@ -1,6 +1,8 @@
 package fr.ensea.project2A.Paint;
 
-public class Point {
+import java.io.Serializable;
+
+public class Point implements Serializable {
     // Variables
     private int x;
     private int y;
