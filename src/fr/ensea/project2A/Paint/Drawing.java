@@ -8,6 +8,10 @@ import java.awt.event.MouseMotionListener;
 import java.io.*;
 import java.util.ArrayList;
 
+/* La classe Drawing permet de stocker toutes les figures crées dans une liste et de les dessiner en temps réel à l'aide
+des actions sur la souris. Elle permet aussi de gerer la sauvegarde des dessins et leur ouvertures grace aux méthodes
+save et read*/
+
 public class Drawing extends JPanel implements MouseMotionListener, MouseListener, Serializable {
     private final int x;
     private final int y;
@@ -17,6 +21,8 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     private String nameFigure;
     private Point firstMouseEvent;
     private Point secondMouseEvent;
+
+
 
     public Drawing() {
         super();
@@ -28,12 +34,12 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         c = Color.white;
         addMouseListener(this);
         addMouseMotionListener(this);
-
-
     }
 
-    public void undoList(){
-        list.remove(list.size()-1);
+
+
+    public void undoList() {
+        list.remove(list.size() - 1);
     }
 
     public void setC(Color c) {
@@ -51,6 +57,8 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     public void setNameFigure(String nameFigure) {
         this.nameFigure = nameFigure;
     }
+
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -134,19 +142,8 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         }
     }
 
-    public void save() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("saveDraw");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(list);
-            out.close();
-            System.out.println("\nSauvegardé avec succès...\n");
-        } catch (Exception e) {
-            System.out.println("Problèmos");
-            e.printStackTrace();
 
-        }
-    }
+
 
     public void save(String nameFile) {
         try {
@@ -162,24 +159,8 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         }
     }
 
-    public void read() {
-        try {
-            FileInputStream fileIn = new FileInputStream("saveDraw");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            list = (ArrayList<Figure>) in.readObject();
-            System.out.println("Ouvert avec succès");
-            in.close();
-            fileIn.close();
 
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void read(String nameFile) {
         try {
@@ -189,6 +170,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
             System.out.println("Ouvert avec succès");
             in.close();
             fileIn.close();
+            repaint();
 
 
         } catch (FileNotFoundException e) {

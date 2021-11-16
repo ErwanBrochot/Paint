@@ -2,16 +2,23 @@ package fr.ensea.project2A.Paint;
 
 import java.awt.*;
 
+/* La classe Circle hérite de Ellipse, elle récupère donc ses attributs et donc ceux de Figure aussi. Elle recupère
+* aussi ses constructeurs et ses méthodes.
+* J'ai ajouté des règles sur la construction de la BoundingBox afin d'obtenir deux axes égaux et interdire le glissement
+* de la figure  lorsque nous essayons de tracer dans les sens qui ne sont pas naturels pour la méthode draw. */
+
 public class Circle extends Ellipse {
     public Circle(int px, int py, Color c) {
         super(px, py, c);
         setBoundingBox(0, 0);
     }
 
+
     @Override
     public String toString() {
         return "Circle{semiAxisX=" + semiAxisX + " semiAxisY= " + semiAxisY + " Color:" + c + "origin" + origin + "}";
     }
+
 
     @Override
     protected void setBoundingBox(int heightBB, int widthBB) {
@@ -25,6 +32,7 @@ public class Circle extends Ellipse {
             semiAxisY = widthBB / 2;
         }
     }
+
 
     @Override
     protected void setBoundingBox(Point origin, Point second) {
